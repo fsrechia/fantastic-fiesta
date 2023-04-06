@@ -2,16 +2,18 @@
 
 int main() {
     for (int i = 1; i  <= 100; i++) {
-        if (i % 3 == 0) {
-            printf("Foo");
+        if (i % 15 == 0) { // multiples of 3 and 5 are also multiples of 15
+            printf("FooBar\n");
         }
-        if (i % 5 == 0) {
-            printf("Bar");
+        else if (i % 3 == 0) {
+            printf("Foo\n");
         }
-        if (i % 5 != 0 && i % 3 != 0) {
-            printf("%d", i);
+        else if (i % 5 == 0) {
+            printf("Bar\n");
         }
-        printf("\n");
+        else {
+            printf("%d\n", i);
+        }
     }
     return 0;
 }
