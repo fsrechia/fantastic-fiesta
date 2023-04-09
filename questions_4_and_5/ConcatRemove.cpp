@@ -4,11 +4,6 @@
 
 using namespace std;
 
-// it is implicit that we ignore spaces from the input... we should implement a sanitization function
-
-#define debug(x) cout << #x << " " << x << "    "
-#define debugendl(x) cout << #x << " " << x << endl
-
 bool ValidateString(string* s) {
     if (s->length() < 1 || s->length() > 100 ) {
         return false;
@@ -79,15 +74,10 @@ bool ConcatRemove(string* s, string* t, int k) {
 
 
     // apply the add operations starting from the index equal to common_length
-    debugendl(common_length);
     for (unsigned int i = 0; i < add_operations; i++) {
         s->at(common_length + i) = t->at(common_length + i);
     }
 
-    debugendl(*s);
-    debugendl(*t);
-    debugendl(s->length());
-    debugendl(t->length());
     if (*s == *t)  {
         return true;
     }
