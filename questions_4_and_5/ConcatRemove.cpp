@@ -43,52 +43,54 @@ int ValidateInput(string* s, string* t, int k) {
 }
 
 bool ConcatRemove(string* s, string* t, int k) {
-    int total_operations = 0;
-    int common_length = 0;
-    int remove_operations = 0;
-    int add_operations = 0;
-    // compare the two strings and find out the common part
-        // consider these three cases:
-            // s is longer than t
-            // s is the same length as t
-            // s is shorter than t
-    // s longer case
-    size_t shorter_length = s->length() <= t->length() ? s->length() : t->length();
-    for (size_t i = 0; i < shorter_length; i++) {
-        debug(i);
-        debug(s->npos);
-        debug(s->at(i));
-        debugendl(t->at(i));
+    unsigned int total_operations = 0;
+    unsigned int common_length = 0;
+    unsigned int remove_operations = 0;
+    unsigned int add_operations = 0;
+
+
+    unsigned int shorter_length = s->length() <= t->length() ? s->length() : t->length();
+    for (unsigned int i = 0; i < shorter_length; i++) {
         if (s->at(i) == t->at(i)) {
             common_length = i + 1;
             continue;
         }
         break;
     }
-    debug(common_length);
-    // subtract lengths and use the difference to do remove ops
+    // subtract lengths and use the difference to do remove and add ops
     remove_operations = s->length() - common_length;
-
-    // remove all unused characters from the starting string
-    // if (remove_operations > 0) {
-    //     s.resize(common_length);
-    // }
-
     add_operations = t->length() - common_length;
-
-    debug(remove_operations);
-    debug(add_operations);
-    // sweep the target string and append stuff until reaching the desired string
-    // for (int i = common_length - 1; i < t->length(); i++) {
-    //     s.resize(i + 1, t[i]);
-    // }
-
-    // if the target string is longer, remove letter by letter of the starting string until we reach the common part
-        // count the number of remove operations (n)
-    // append new letters to the starting string to match the target string
-        // count the number of append operations (n+=)
-    // compare total operations to k (return n <= k)
     total_operations = remove_operations + add_operations;
-    debugendl(total_operations);
-    return total_operations <= k;
+
+    // if total operations exceed the maximum, there is no point in trying to do
+    // a half-assed job
+    if (total_operations > k) {
+        return false;
+    }
+
+    // remove all unused characters from the starting string and resize the starting
+    // string appropriately to fit the new characters
+    if (remove_operations > 0) {
+        s->resize(common_length);
+    }
+    if (add_operations > 0) {
+        s->resize(common_length + add_operations);
+    }
+
+
+    // apply the add operations starting from the index equal to common_length
+    debugendl(common_length);
+    for (unsigned int i = 0; i < add_operations; i++) {
+        s->at(common_length + i) = t->at(common_length + i);
+    }
+
+    debugendl(*s);
+    debugendl(*t);
+    debugendl(s->length());
+    debugendl(t->length());
+    if (*s == *t)  {
+        return true;
+    }
+    cout << "Unexpected result" << endl;
+    return false;
 }

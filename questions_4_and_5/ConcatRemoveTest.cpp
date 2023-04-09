@@ -9,6 +9,7 @@ bool TestStringValidation (string* s, bool expected) {
     bool result = ValidateString(s);
     cout << "  Result:   " << (result ? "yes" : "no") << endl;
     cout << "  Expected: " << (expected ? "yes" : "no") << endl;
+    cout << endl;
     return result == expected;
 }
 
@@ -99,6 +100,20 @@ bool string_empty() {
     return TestStringValidation(&testString, false);
 }
 
+bool s_and_t_length_one() {
+    string s("a");
+    string t("b");
+    return TestConcatRemove(&s, &t, 2, true);
+}
+
+bool s_and_t_length_one_not_enough_ops() {
+    string s("a");
+    string t("b");
+    return TestConcatRemove(&s, &t, 1, false);
+}
+
+
+
 int main() {
     int failures = 0;
 
@@ -114,6 +129,8 @@ int main() {
     string_invalid_characters() || failures++;
     string_too_long() || failures++;
     string_empty() || failures++;
+    s_and_t_length_one() || failures++;
+    s_and_t_length_one_not_enough_ops() || failures++;
 
     cout << endl << "Failure count: " << failures << endl;
     return failures;
