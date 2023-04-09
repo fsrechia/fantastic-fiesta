@@ -13,5 +13,5 @@ enum ValidationErrors
 
 
 bool ValidateString(string* s);
-int ValidateInput(string* s, string* t, int k);
-bool ConcatRemove(string* s, string* t, int k);
+int ValidateInput(string* s, string* t, unsigned int k);
+bool ConcatRemove(string* s, string* t, unsigned int k);

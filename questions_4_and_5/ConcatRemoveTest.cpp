@@ -14,7 +14,7 @@ bool TestStringValidation (string* s, bool expected) {
 }
 
 
-bool TestConcatRemove(string* s, string* t, int k, bool expected) {
+bool TestConcatRemove(string* s, string* t, unsigned int k, bool expected) {
     cout << "Testing ConcatRemove of:" << endl;
     cout << " s: '" << *s << "'" << endl;
     cout << " t: '" << *t << "'" << endl;

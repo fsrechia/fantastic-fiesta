@@ -24,7 +24,7 @@ bool ValidateString(string* s) {
 }
 
 
-int ValidateInput(string* s, string* t, int k) {
+int ValidateInput(string* s, string* t, unsigned int k) {
     if (ValidateString(s)) {
         return STARTING_STRING_ERROR;
     }
@@ -37,7 +37,7 @@ int ValidateInput(string* s, string* t, int k) {
     return NO_ERROR;
 }
 
-bool ConcatRemove(string* s, string* t, int k) {
+bool ConcatRemove(string* s, string* t, unsigned int k) {
     unsigned int total_operations = 0;
     unsigned int common_length = 0;
     unsigned int remove_operations = 0;
