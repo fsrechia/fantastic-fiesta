@@ -32,6 +32,12 @@ bool s_longer_than_t_test_enough_ops() {
     return TestConcatRemove(&s, &t, 8, true);
 }
 
+bool s_longer_than_t_enough_ops_common_prefix_size_of_t() {
+    string s("opqrst");
+    string t("opq");
+    return TestConcatRemove(&s, &t, 3, true);
+}
+
 bool s_longer_than_t_test_not_enough_ops() {
     string s("blablablabla");
     string t("blablabcde");
@@ -55,6 +61,12 @@ bool s_shorter_than_t_enough_ops() {
     string s("xyz");
     string t("abcdef");
     return TestConcatRemove(&s, &t, 9, true);
+}
+
+bool s_shorter_than_t_enough_ops_common_prefix_size_of_s() {
+    string s("abc");
+    string t("abcdef");
+    return TestConcatRemove(&s, &t, 3, true);
 }
 
 bool s_shorter_than_t_not_enough_ops() {
@@ -91,10 +103,12 @@ int main() {
     int failures = 0;
 
     s_longer_than_t_test_enough_ops() || failures++;
+    s_shorter_than_t_enough_ops_common_prefix_size_of_s() || failures++;
     s_longer_than_t_test_not_enough_ops() || failures++;
     s_same_length_as_t_test_enough_ops() || failures++;
     s_same_length_as_t_test_not_enough_ops() || failures++;
     s_shorter_than_t_enough_ops() || failures++;
+    s_shorter_than_t_enough_ops_common_prefix_size_of_s() || failures++;
     s_shorter_than_t_not_enough_ops() || failures++;
     string_valid() || failures++;
     string_invalid_characters() || failures++;

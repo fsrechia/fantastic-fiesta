@@ -4,14 +4,10 @@
 
 using namespace std;
 
-// validate input
-// a) 1 <= | s | <= 100
-// b) 1 <= | t | <= 100
-// c) 1 <= k <= 100
-// d) s and t consists of lowercase letters of the Portuguese alphabet, ascii [a-z]
-
 // it is implicit that we ignore spaces from the input... we should implement a sanitization function
 
+#define debug(x) cout << #x << " " << x << "    "
+#define debugendl(x) cout << #x << " " << x << endl
 
 bool ValidateString(string* s) {
     if (s->length() < 1 || s->length() > 100 ) {
@@ -57,13 +53,19 @@ bool ConcatRemove(string* s, string* t, int k) {
             // s is the same length as t
             // s is shorter than t
     // s longer case
-    for (uint i = 0; i < s->length(); i++) {
-        if (s[i] == t[i]) {
+    size_t shorter_length = s->length() <= t->length() ? s->length() : t->length();
+    for (size_t i = 0; i < shorter_length; i++) {
+        debug(i);
+        debug(s->npos);
+        debug(s->at(i));
+        debugendl(t->at(i));
+        if (s->at(i) == t->at(i)) {
+            common_length = i + 1;
             continue;
         }
-        common_length = i; // first different index here
         break;
     }
+    debug(common_length);
     // subtract lengths and use the difference to do remove ops
     remove_operations = s->length() - common_length;
 
@@ -73,6 +75,9 @@ bool ConcatRemove(string* s, string* t, int k) {
     // }
 
     add_operations = t->length() - common_length;
+
+    debug(remove_operations);
+    debug(add_operations);
     // sweep the target string and append stuff until reaching the desired string
     // for (int i = common_length - 1; i < t->length(); i++) {
     //     s.resize(i + 1, t[i]);
@@ -84,5 +89,6 @@ bool ConcatRemove(string* s, string* t, int k) {
         // count the number of append operations (n+=)
     // compare total operations to k (return n <= k)
     total_operations = remove_operations + add_operations;
+    debugendl(total_operations);
     return total_operations <= k;
 }
