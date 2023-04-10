@@ -20,8 +20,6 @@
       ('9', '80', '89'),
       ('10', '90', '100');
 
-
-
     CREATE TABLE Students (
       `ID` INTEGER,
       `Name` VARCHAR(9),
@@ -43,24 +41,26 @@
 **Query #1**
 
     SELECT
-    	IF (Notes.Grade < 8, "NULL", Students.Name) AS Name,
-        Notes.Grade as Grade,
-        Students.Value as Value
+    IF (Notes.Grade < 8, "NULL", Students.Name) AS Name,
+      Notes.Grade as Grade,
+      Students.Value as Value
     FROM Students
     LEFT JOIN Notes
-    	ON Value >= Notes.Min_value
-      	AND Value <= Notes.Max_Value
-    ORDER BY Grade DESC, Name DESC, Value ASC;
+    ON Value >= Notes.Min_value
+      AND Value <= Notes.Max_Value
+    ORDER BY
+    Grade DESC,
+    IF(Grade >= 8, Name, Value) ASC;
 
 | Name    | Grade | Value |
 | ------- | ----- | ----- |
 | Maria   | 10    | 99    |
-| Marcela | 9     | 88    |
 | Julia   | 9     | 81    |
+| Marcela | 9     | 88    |
 | Andreia | 8     | 78    |
 | NULL    | 7     | 63    |
 | NULL    | 7     | 68    |
 
 ---
 
-[View on DB Fiddle](https://www.db-fiddle.com/f/xApZskR4vx3Xqhut558YBZ/8)
+[View on DB Fiddle](https://www.db-fiddle.com/f/xApZskR4vx3Xqhut558YBZ/9)
