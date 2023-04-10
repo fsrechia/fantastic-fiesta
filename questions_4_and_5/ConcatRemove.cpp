@@ -4,20 +4,17 @@
 
 using namespace std;
 
+#define ASCII_CHARACTER_a 97
+#define ASCII_CHARACTER_z 122
+
 bool ValidateString(string* s) {
     if (s->length() < 1 || s->length() > 100 ) {
-        // cout << "string length error: " << s->length() << endl;
         return false;
     }
-    string validChars = "";
-    // TODO: calculate this only once, or use ascii comparison if possible (e.g. 97 < letter < 122)
-    for (char letter = 'a'; letter <= 'z' ; letter++) {
-        validChars += letter;
-    }
+
+    // check if character is not between a-z
     for (string::iterator it = s->begin() ; it < s->end() ; ++it){
-        bool found = validChars.find(*it) != string::npos;
-        if (!found) {
-            // cout << "Found invalid character: " << *it << endl;
+        if (*it < ASCII_CHARACTER_a || *it > ASCII_CHARACTER_z) {
             return false;
         }
     }
