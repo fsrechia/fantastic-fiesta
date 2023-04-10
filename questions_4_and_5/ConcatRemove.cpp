@@ -6,6 +6,7 @@ using namespace std;
 
 bool ValidateString(string* s) {
     if (s->length() < 1 || s->length() > 100 ) {
+        // cout << "string length error: " << s->length() << endl;
         return false;
     }
     string validChars = "";
@@ -16,7 +17,7 @@ bool ValidateString(string* s) {
     for (string::iterator it = s->begin() ; it < s->end() ; ++it){
         bool found = validChars.find(*it) != string::npos;
         if (!found) {
-            cout << "Found invalid character: " << *it << endl;
+            // cout << "Found invalid character: " << *it << endl;
             return false;
         }
     }
@@ -43,7 +44,6 @@ bool ConcatRemove(string* s, string* t, unsigned int k) {
     unsigned int remove_operations = 0;
     unsigned int add_operations = 0;
 
-
     unsigned int shorter_length = s->length() <= t->length() ? s->length() : t->length();
     for (unsigned int i = 0; i < shorter_length; i++) {
         if (s->at(i) == t->at(i)) {
@@ -63,6 +63,10 @@ bool ConcatRemove(string* s, string* t, unsigned int k) {
         return false;
     }
 
+    // From this point on, we know that s can be converted to t. It is not entirely clear
+    // from the requirements whether it is necessary to do the actual conversion.
+    // We implement the conversion here for completeness:
+
     // remove all unused characters from the starting string and resize the starting
     // string appropriately to fit the new characters
     if (remove_operations > 0) {
@@ -71,7 +75,6 @@ bool ConcatRemove(string* s, string* t, unsigned int k) {
     if (add_operations > 0) {
         s->resize(common_length + add_operations);
     }
-
 
     // apply the add operations starting from the index equal to common_length
     for (unsigned int i = 0; i < add_operations; i++) {
