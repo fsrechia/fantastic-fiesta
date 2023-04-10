@@ -6,7 +6,8 @@ using namespace std;
 int main()
 {
     string user_string;
-    int i = 0;
+    int i = 0, j = 0;
+    int length = 0;
 
     getline(cin, user_string);
 
@@ -15,12 +16,18 @@ int main()
         i++;
     }
 
-    // initial solution still uses stdout as a sort of buffer :(
-    cout << "reversed string is: ";
-    while(i >= 0) {
-        cout << user_string[--i];
-    }
-    cout << endl;
+    length = i;
 
+    // reverse string without temp or buffers:
+
+    for (i = 0; i < length/2; i++) {
+        j = length - 1 - i; // mirror_index
+        // use XOR to do the byte-swapping!
+        user_string[i] = user_string[i] ^ user_string[j];
+        user_string[j] = user_string[i] ^ user_string[j];
+        user_string[i] = user_string[i] ^ user_string[j];
+    }
+
+    cout << user_string << endl;
 	return 0;
 }
