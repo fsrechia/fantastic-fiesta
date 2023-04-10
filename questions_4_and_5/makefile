@@ -1,11 +1,14 @@
-SOURCES := ConcatRemove.cpp ConcatRemoveTest.cpp
 CXX = g++
 CPPFLAGS =        # put pre-processor settings (-I, -D, etc) here
 CXXFLAGS = -Wall  # put compiler settings here
 LDFLAGS =         # put linker settings here
 
+concat_remove_app:
+	$(CXX) ConcatRemove.cpp main.cpp -o $@ $(CXXFLAGS) $(LDFLAGS)
+
 test:
-	$(CXX) $(SOURCES) -o $@ $(CXXFLAGS) $(LDFLAGS)
+	$(CXX) ConcatRemove.cpp ConcatRemoveTest.cpp -o $@ $(CXXFLAGS) $(LDFLAGS)
 
 clean:
-	rm -v test
+	rm -vf test
+	rm -vf concat_remove_app
