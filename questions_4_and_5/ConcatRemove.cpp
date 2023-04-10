@@ -25,10 +25,10 @@ bool ValidateString(string* s) {
 
 
 int ValidateInput(string* s, string* t, unsigned int k) {
-    if (ValidateString(s)) {
+    if (!ValidateString(s)) {
         return STARTING_STRING_ERROR;
     }
-    if (ValidateString(t)) {
+    if (!ValidateString(t)) {
         return TARGET_STRING_ERROR;
     }
     if (k < 1 || k > 100) {
